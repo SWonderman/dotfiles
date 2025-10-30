@@ -1,12 +1,8 @@
 return {
-  'ellisonleao/gruvbox.nvim',
+  'EdenEast/nightfox.nvim',
   priority = 1000,
   config = function()
-    require('gruvbox').setup {
-      contrast = 'hard',
-    }
-
-    vim.cmd.colorscheme 'gruvbox'
+    vim.cmd.colorscheme 'carbonfox'
   end,
   opts = ...,
 }

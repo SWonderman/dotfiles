@@ -16,3 +16,6 @@ vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper win
 
 -- Better copy/paste
 vim.keymap.set('v', '<leader>y', '"+y', { desc = 'Copy selected text to clipboard' })
+
+-- Display diagnostics in a floating window
+vim.keymap.set("n", "<leader>e", "<cmd>lua vim.diagnostic.open_float({scope='line'})<CR>")

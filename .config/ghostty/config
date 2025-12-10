@@ -1,0 +1,6 @@
+theme = Gruvbox Dark Hard
+
+window-inherit-font-size = false
+
+font-family = BerkeleyMono Nerd Font Mono
+font-size = 13

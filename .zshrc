@@ -84,3 +84,7 @@ export NVM_DIR="$HOME/.nvm"
 
 # Antigravity
 export PATH="/Users/sw/.antigravity/antigravity/bin:$PATH"
+
+# Laravel
+export PATH="$HOME/.config/composer/vendor/bin:$PATH"
+

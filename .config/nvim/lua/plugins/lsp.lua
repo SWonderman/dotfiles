@@ -81,6 +81,7 @@ return {
           end
 
           if client and client_supports_method(client, vim.lsp.protocol.Methods.textDocument_inlayHint, event.buf) then
+            -- Hidden by default; reveal derived types on demand.
             map('<leader>th', function()
               vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled { bufnr = event.buf })
             end, '[T]oggle Inlay [H]ints')
@@ -124,10 +125,62 @@ return {
 
         rust_analyzer = {},
 
-        ts_ls = {},
+        vtsls = {
+          settings = {
+            typescript = {
+              inlayHints = {
+                parameterNames = { enabled = 'literals' },
+                variableTypes = { enabled = true },
+                propertyDeclarationTypes = { enabled = true },
+                functionLikeReturnTypes = { enabled = true },
+              },
+            },
+            javascript = {
+              inlayHints = {
+                parameterNames = { enabled = 'literals' },
+                variableTypes = { enabled = true },
+                propertyDeclarationTypes = { enabled = true },
+                functionLikeReturnTypes = { enabled = true },
+              },
+            },
+          },
+        },
 
-        ruff = {},
-        basedpyright = {},
+        -- SvelteKit
+        svelte = {},
+
+        -- Tailwind, ESLint, Emmet for the React/Svelte workflow
+        tailwindcss = {},
+        eslint = {},
+        emmet_language_server = {},
+
+        -- Python: ruff handles linting + import sorting + formatting,
+        -- basedpyright handles type checking.
+        ruff = {
+          -- Let basedpyright own hover so the two don't fight over docs.
+          on_attach = function(client)
+            client.server_capabilities.hoverProvider = false
+          end,
+        },
+        basedpyright = {
+          settings = {
+            basedpyright = {
+              analysis = {
+                typeCheckingMode = 'standard',
+                diagnosticMode = 'openFilesOnly',
+                diagnosticSeverityOverrides = {
+                  reportMissingTypeStubs = 'none',
+                  reportUnknownMemberType = 'none',
+                  reportUnknownVariableType = 'none',
+                  reportUnknownArgumentType = 'none',
+                  reportUnknownParameterType = 'none',
+                  reportUnknownLambdaType = 'none',
+                  reportAny = 'none',
+                },
+              },
+            },
+          },
+        },
 
         lua_ls = {
           settings = {
@@ -144,11 +197,12 @@ return {
       local ensure_installed = vim.tbl_keys(servers or {})
       vim.list_extend(ensure_installed, {
         'stylua',
+        'prettierd', -- formatter for JS/TS/Svelte/CSS/JSON/YAML/Markdown
       })
       require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 
       require('mason-lspconfig').setup {
-        ensure_installed = { 'ts_ls', 'ruff', 'basedpyright', 'lua_ls', 'gopls', 'rust_analyzer' },
+        ensure_installed = vim.tbl_keys(servers),
         automatic_installation = false,
         handlers = {
           function(server_name)

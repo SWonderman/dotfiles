@@ -15,6 +15,7 @@ vim.schedule(function()
 end)
 
 vim.o.breakindent = true
+vim.o.wrap = false
 
 vim.o.undofile = true
 

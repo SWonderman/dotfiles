@@ -1,8 +1,4 @@
-theme = Gruvbox Dark Hard
-
 window-inherit-font-size = false
 
 font-family = Fira Code
-font-size = 14
-
-background-opacity = 0.97
+font-size = 13

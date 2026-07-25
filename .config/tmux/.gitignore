@@ -1,0 +1,6 @@
+# TPM-managed plugins (installed with `prefix + I`)
+plugins/
+# tmux-resurrect / continuum runtime saves
+resurrect/
+# untracked theme override written by a future theme switcher
+config/theme-active.conf

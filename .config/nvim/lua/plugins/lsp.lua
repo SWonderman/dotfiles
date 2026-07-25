@@ -43,6 +43,11 @@ return {
           map('gW', require('telescope.builtin').lsp_dynamic_workspace_symbols, 'Open Workspace Symbols')
           map('grt', require('telescope.builtin').lsp_type_definitions, '[G]oto [T]ype Definition')
 
+          -- JetBrains-style "Find Usages"
+          map('<leader>u', function()
+            require('telescope.builtin').lsp_references { include_declaration = false }
+          end, 'Find [U]sages')
+
           -- This function resolves a difference between neovim nightly (version 0.11) and stable (version 0.10)
           ---@param client vim.lsp.Client
           ---@param method vim.lsp.protocol.Method

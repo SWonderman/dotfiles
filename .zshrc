@@ -19,19 +19,21 @@ alias gfe="git fetch"
 # Prompt
 #########
 
+autoload -U colors && colors
 setopt prompt_subst
 
-git_prompt_info() {
+git_prompt_info(){
   local dirstatus=" OK"
   local dirty="%{$fg_bold[red]%} X%{$reset_color%}"
 
-  if [[ ! -z $(git status --porcelain 2> /dev/null | tail -n1) ]]; then
+  if [[ -n $(git status --porcelain 2> /dev/null | tail -n1) ]]; then
     dirstatus=$dirty
   fi
 
-  ref=$(git symbolic-ref HEAD 2> /dev/null) || \
-  ref=$(git rev-parse --short HEAD 2> /dev/null) || return
-  echo " %{$fg_bold[green]%}${ref#refs/heads/}$dirstatus%{$reset_color%}"
+  local ref=$(git symbolic-ref HEAD 2> /dev/null | cut -d'/' -f3) || \
+    ref=$(git rev-parse --short HEAD 2> /dev/null) || return
+
+  echo " %{$fg_bold[green]%}${ref}${dirstatus}%{$reset_color%}"
 }
 
 local dir_info_color="%B"
@@ -41,7 +43,8 @@ if [ -r ${dir_info_color_file} ]; then
   source ${dir_info_color_file}
 fi
 
-local dir_info="%{$dir_info_color%}%(5~|%-1~/.../%2~|%4~)%{$reset_color%}"
+local dir_info="%{$fg[white]%}%(5~|%-1~/.../%2~|%-2~/)%{$reset_color%}"
+
 local promptnormal="φ %{$reset_color%}"
 local promptjobs="%{$fg_bold[red]%}φ %{$reset_color%}"
 
@@ -88,3 +91,11 @@ export PATH="/Users/sw/.antigravity/antigravity/bin:$PATH"
 # Laravel
 export PATH="$HOME/.config/composer/vendor/bin:$PATH"
 
+# bun completions
+[ -s "/Users/sw/.bun/_bun" ] && source "/Users/sw/.bun/_bun"
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
+export PATH="$HOME/odin-2026-05-03:$PATH"
+export XDG_CONFIG_HOME="$HOME/.config"

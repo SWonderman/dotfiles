@@ -1,0 +1,17 @@
+[user]
+	name = Szymon Witt
+	email = szymonwitt2707@gmail.com
+
+[core]
+	pager = delta
+
+[interactive]
+	diffFilter = delta --color-only
+
+[delta]
+	navigate = true
+	dark = true
+	side-by-side = true
+
+[merge]
+	conflictStyle = zdiff3

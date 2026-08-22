@@ -1,4 +1,4 @@
-local default_theme = 'kanagawa'
+local default_theme = 'nightfox'
 
 return {
   {
@@ -44,6 +44,22 @@ return {
     init = function()
       if default_theme == 'kanagawa' then
         vim.cmd.colorscheme 'kanagawa-dragon'
+      end
+    end,
+  },
+  {
+    'EdenEast/nightfox.nvim',
+    priority = 1000,
+    config = function()
+      require('nightfox').setup {
+        options = {
+          dim_inactive = true,
+        },
+      }
+    end,
+    init = function()
+      if default_theme == 'nightfox' then
+        vim.cmd.colorscheme 'nightfox'
       end
     end,
   },

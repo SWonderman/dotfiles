@@ -55,6 +55,11 @@ return {
         options = {
           dim_inactive = true,
         },
+        groups = {
+          all = {
+            Whitespace = { fg = '#39506d' },
+          },
+        },
       }
     end,
     init = function()

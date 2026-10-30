@@ -23,6 +23,7 @@ vim.o.ignorecase = true
 vim.o.smartcase = true
 
 vim.o.signcolumn = 'yes'
+vim.o.statuscolumn = '%s%l  '
 
 vim.o.updatetime = 250
 

@@ -1,0 +1,10 @@
+# Herdr writes lots of generated state into ~/.config/herdr-app.
+# Only track files we deliberately own.
+*
+!.gitignore
+!settings.json
+# Uncomment as you add your own:
+# !keys.json
+# !programs.json
+# !themes/
+# !themes/*.json
